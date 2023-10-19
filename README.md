@@ -5,14 +5,13 @@ Full tests for PCS calculations <br>
 Download the full package <br>
 
 edit Utilities/set_variables.py to match your enviornment <br>
-
-edit set_variables.py to match your enviornment <br>
-
 <br>
+
 cd Fortran<br>
 modify link.sh to adapt it to your fortran environment <br>
 sh ./linka.sh <br>
 cd .. <br>
+<br>
 
 Usage:  <br>
 python runtests.py -m/--matrix file.matrix <br>
@@ -24,18 +23,19 @@ python runtests.py -m/--matrix file.matrix <br>
 &emsp; &emsp; &emsp;  -c/--cutoff cutoff to define TP/TN: 0.8 = Max experimental performance * 0.8 <br>
 <br>
 
-# Make a test
+# Run an example
 cd Examples <br>
 
+<br>
+Run first all tests<br>
 python $PATH_TO_PCS/runtests.py -m test.matrix -d up -n 10 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
+<br>
 
-Note:  $PATH_TO_PCS is the path to the pcs location 
-
-
-# Make plots
+Then make plots analyzing tests<br>
 python $PATH_TO_PCS/Plots/runplots.py -m test.matrix <br>
+<br>
 
-Note:  $PATH_TO_PCS is the path to the pcs location 
+Note:  $PATH_TO_PCS is the path to the pcs location <br>
 
-This script prepares a series of plots to analyze outputs
+
 
