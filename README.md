@@ -1,13 +1,13 @@
 # pcs
-Full tests for PCS calculations
+Full tests for PCS calculations <br>
 
 # How to install
 Download the full package <br>
-<<<<<<< HEAD
+
 edit Utilities/set_variables.py to match your enviornment <br>
-=======
+
 edit set_variables.py to match your enviornment <br>
->>>>>>> 3d829ceacc6a6cebc43850a8d199066b6fda4dbe
+
 <br>
 cd Fortran<br>
 modify link.sh to adapt it to your fortran environment <br>
