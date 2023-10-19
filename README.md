@@ -9,7 +9,7 @@ edit Utilities/set_variables.py to match your enviornment <br>
 
 cd Fortran<br>
 modify link.sh to adapt it to your fortran environment <br>
-sh ./linka.sh <br>
+sh ./link.sh <br>
 cd .. <br>
 <br>
 
