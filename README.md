@@ -24,15 +24,15 @@ python runtests.py -m/--matrix file.matrix <br>
 <br>
 
 # Run an example
-cd Examples <br>
+cd Examples/01 <br>
 
 <br>
 First run all tests<br>
-python $PATH_TO_PCS/runtests.py -m test.matrix -d up -n 10 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
+python $PATH_TO_PCS/runtests.py -m sys01.matrix -d up -n 10 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
 <br>
 
 Then make plots analyzing tests<br>
-python $PATH_TO_PCS/runplots.py -m test.matrix <br>
+python $PATH_TO_PCS/runplots.py -m sys01.matrix <br>
 <br>
 
 Note:  $PATH_TO_PCS is the path to the pcs location <br>
