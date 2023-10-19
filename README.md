@@ -27,7 +27,7 @@ python runtests.py -m/--matrix file.matrix <br>
 cd Examples <br>
 
 <br>
-Run first all tests<br>
+First run all tests<br>
 python $PATH_TO_PCS/runtests.py -m test.matrix -d up -n 10 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
 <br>
 
