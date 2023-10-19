@@ -29,8 +29,8 @@ from set_variables import *
 
 MLRBinary, PYTHONHOME = GetVariables()
 
-REORDER_MATRIX   = PYTHONHOME + "/matrix_reorder.py"
-NORMALIZE_MATRIX = PYTHONHOME + "/matrix_normalize.py"
+REORDER_MATRIX   = PYTHONHOME + "Utilities/matrix_reorder.py"
+NORMALIZE_MATRIX = PYTHONHOME + "Utilities/matrix_normalize.py"
 
 RUN_MLR   = PYTHONHOME + "Tests/mlr.py"
 RUN_LOO   = PYTHONHOME + "Tests/loo.py"
