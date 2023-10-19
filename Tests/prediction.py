@@ -27,10 +27,9 @@ import sys
 import os
 import numpy as np
 
-from matrix_operation import *
-
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from Utilities.set_variables import *
+from Utilities.matrix_operation import *
 
 
 # ---------------------
