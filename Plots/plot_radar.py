@@ -26,7 +26,7 @@ def read_data(DATFile):
     data2 = []
     data3 = []
 
-    for line in lines:
+    for line in lines[1:]:
         words = line.split()
         if len(words) == 4:
            label.append(line.split()[0])
@@ -51,7 +51,7 @@ def read_data(DATFile):
 # --- Main program below
 
  
- # checking 5 arguments are passed from command line
+# checking 5 arguments are passed from command line
  
 if (len(sys.argv)<2) :
    print(' ')
@@ -69,8 +69,11 @@ label_loc = np.linspace(start=0, stop=2 * np.pi, num=len(label))
 
 fig, ax = plt.subplots(figsize=(5,5), subplot_kw=dict(polar=True))
 
+
+basename = os.path.splitext(sys.argv[1])[0]
+
 ax.plot(label_loc, data1+data3, lw=2, label='reference')
-ax.plot(label_loc, data1, lw=3, label=sys.argv[1])
+ax.plot(label_loc, data1, lw=3, label=basename)
 
 ax.set_theta_direction(-1)
 ax.set_theta_offset(np.pi / 2.0)
