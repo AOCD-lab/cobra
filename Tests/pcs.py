@@ -147,7 +147,7 @@ def main():
     file_lines = ( file.readlines() )
     file.close()
     words = []
-    words = file_lines[4].split()[6:9]
+    words = file_lines[4].split()[5:8]
     words = np.array(words).astype(np.float)
     cycle_pre = words[0]
     cycle_acc = words[1]
