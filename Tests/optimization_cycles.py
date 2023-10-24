@@ -431,14 +431,27 @@ def one_loop_3bags():
     Acc_3_bags, Pre_3_bags, Rec_3_bags = calc_Acc_Pre_Rec_3bags(no_of_TP, no_of_FP, no_of_TN, no_of_FN)
     
     with open(OUTFile, "a") as f:
-        for c in range(4):
-            f.write("{:5d} ".format(no_of_TP[c])
-                   +"{:5d} ".format(no_of_FP[c])
-                   +"{:5d} ".format(no_of_TN[c])
-                   +"{:5d} ".format(no_of_FN[c]) 
+        f.write("{:85s} ".format('Cycle       TP       FP       TN       FN     Acc.   Pre.   Rec.') + '\n')
+        for c in range(3):
+            c1 = c + 1
+            f.write("{:3d}  ".format(c1) 
+                   +"{:9d}   ".format(no_of_TP[c])
+                   +"{:6d}   ".format(no_of_FP[c])
+                   +"{:6d}   ".format(no_of_TN[c])
+                   +"{:6d}   ".format(no_of_FN[c]) 
                    +"{:6.3f} ".format(Acc_3_bags[c]) 
                    +"{:6.3f} ".format(Pre_3_bags[c]) 
                    +"{:6.3f} ".format(Rec_3_bags[c]) + '\n')
+   
+  
+        f.write("{:3s}   ".format('All')  
+               +"{:8d}   ".format(no_of_TP[3])
+               +"{:6d}   ".format(no_of_FP[3])
+               +"{:6d}   ".format(no_of_TN[3])
+               +"{:6d}   ".format(no_of_FN[3]) 
+               +"{:6.3f} ".format(Acc_3_bags[3]) 
+               +"{:6.3f} ".format(Pre_3_bags[3]) 
+               +"{:6.3f} ".format(Rec_3_bags[3]) + '\n')
    
   
     os.system('rm temp.out')
