@@ -66,8 +66,8 @@ plt.rcParams.update({ 'font.sans-serif': 'Myriad Pro',
 
 # set axes ticks and format
 
-fig.set_figwidth(2.0)
-fig.set_figheight(2.0)
+fig.set_figwidth(3.0)
+fig.set_figheight(3.0)
 
 ax.set_xlim(-1.0, 1.0)
 for axis in ['top','bottom','left','right']:
@@ -87,25 +87,37 @@ ax.xaxis.set_major_locator(MultipleLocator(1))
 ax.xaxis.set_minor_locator(AutoMinorLocator(2))
 
 
+ax.yaxis.set_major_locator(MultipleLocator(1))
+ax.yaxis.set_minor_locator(AutoMinorLocator(2))
+
+
 ax.tick_params(which='both', width=1.0, length=3)
+
+plt.rcParams.update({ 'font.sans-serif': 'Myriad Pro',
+                      'font.family': 'sans-serif'        })
+
 
 
 # ax.set_xticks([-2, -1.0, 0.0, 1, 2], minor=True)
-ax.set_yticks([0.0, 1.0, 2.0, 3.0])
+# ax.set_yticks([0.0, 1.0, 2.0, 3.0])
+ax.tick_params(axis='x', labelsize=11)
+ax.tick_params(axis='y', labelsize=11)
 
 
 # Set coloumn with reference colors
 
 
+plt.title("Bootstrapping", fontsize = 12)
+plt.xlabel("Deviation", fontsize = 12)
+plt.ylabel("Probability", fontsize = 12)
+
+plt.tight_layout()
+
+
+
 filename, file_extension = os.path.splitext(sys.argv[1])
-plt.savefig(filename+".ps")
-plt.savefig(filename+".png")
+plt.savefig(filename+".boot.ps")
+plt.savefig(filename+".boot.png")
 
 print('Info:   ','Normal termination'                         )
-
-
-
-
-
-
 
