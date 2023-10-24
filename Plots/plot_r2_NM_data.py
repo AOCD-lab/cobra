@@ -82,7 +82,7 @@ ax.xaxis.set_major_locator(AutoLocator())
 ax.yaxis.set_major_locator(AutoLocator())
 ax.tick_params(which='both', width=1.0, length=3)
 
-plt.title("Fitting: Original data", fontsize = 12)
+plt.title("Fitting: Normalized data", fontsize = 12)
 plt.xlabel("Experimental data", fontsize = 12)
 plt.ylabel("Fitted data", fontsize = 12)
 
