@@ -16,8 +16,9 @@ Input:
 Output:
     OutputFile  = myfile.pred_out  Output file with everything on the fitting
     PRED_File   = myfile.pred_mae  MAE of predictions from experimental and fitted full dataset
-    DATFile     = myfile.pred_dat  Experimental, fitted full dataset, predicted, 
+    PREFile     = myfile.pred_dat  Experimental, fitted full dataset, predicted, 
                                    deviations from experimental and fitted 
+    DATFile     = myfile.pred_dat  Experimental, fitted and predicted  
    
 @author: Zhen Cao, Luigi Cavallo
 --------------------------------------------------------------------------- """
@@ -41,8 +42,9 @@ def GetFiles():
 
     OutputFile  = myfile.pred_out  Output file with everything on the fitting
     PRED_File   = myfile.pred_mae  MAE of predictions from experimental and fitted full dataset
-    DATFile     = myfile.pred_dat  Experimental, fitted full dataset, predicted, 
+    PREFile     = myfile.pred_pre  Experimental, fitted full dataset, predicted, 
                                    deviations from experimental and fitted 
+    DATFile     = myfile.pred_dat  Experimental, fitted and predicted  
 
     ------------------------------------------------------------------- """
 
@@ -75,13 +77,14 @@ def GetFiles():
     OutputFile  = MatrixFile.replace("matrix", "pred_out")
     TempFile    = MatrixFile.replace("matrix", "tmp")
     PRED_File   = MatrixFile.replace("matrix", "pred_mae")
+    PREFile     = MatrixFile.replace("matrix", "pred_pre")
     DATFile     = MatrixFile.replace("matrix", "pred_dat")
 
-    return (MatrixFile, OutputFile, TempFile, PRED_File, DATFile, percentage, updown_flag)
+    return (MatrixFile, OutputFile, TempFile, PRED_File, PREFile, DATFile, percentage, updown_flag)
 
 
 # ---------------------
-def analysis_pred(PRED_File, DATFile, system_tags, out_skipped, 
+def analysis_pred(PRED_File, PREFile, DATFile, system_tags, out_skipped, 
                   experimental_data, reference_fit, reference_pre) :
 
   # analyzes predicted experimental values from bootstrap run and writes out MAE_boot_exp
@@ -106,7 +109,7 @@ def analysis_pred(PRED_File, DATFile, system_tags, out_skipped,
     difference_exp = []
     difference_fit = []
 
-    with open(DATFile, "w") as f:
+    with open(PREFile, "w") as f:
          for p in range(out_skipped[1]-1, out_skipped[-1]):
  
                # find which system is predicted
@@ -195,7 +198,7 @@ def main():
     
   # get input and output files
 
-    MatrixFile, OutputFile, TempFile, PRED_File, DATFile, percentage, updown_flag = GetFiles()
+    MatrixFile, OutputFile, TempFile, PRED_File, PREFile, DATFile, percentage, updown_flag = GetFiles()
     MLRBinary, PYTHONHOME = GetVariables()
 
   # call read_matrix to read matrix_file
@@ -284,11 +287,27 @@ def main():
 
     with open(OutputFile, "r") as f:
          lines = f.readlines()
+
+    with open(DATFile, "w") as f:
          for line in lines:
              if (line[-4:-1] == "Fit"):
-                reference_pre.append(float(line.split()[6]))
+                columns = line.split()
+                reference_pre.append(float(columns[6]))
+                useful_data = np.array(columns[2:5]).astype(np.float)
+                f.write("{:12s}".format(columns[1]) 
+                      + "{:10.5f}".format(useful_data[0])    
+                      + "{:10.5f}".format(useful_data[1])    
+                      + "{:10.5f}".format(useful_data[2]) + '  ' 
+                      + "{:3s}".format(columns[8])        + '\n' )
              if (line[-4:-1] == "Pre"):
-                reference_pre.append(float(line.split()[6]))
+                columns = line.split()
+                reference_pre.append(float(columns[6]))
+                useful_data = np.array(columns[2:5]).astype(np.float)
+                f.write("{:12s}".format(columns[1]) 
+                      + "{:10.5f}".format(useful_data[0])    
+                      + "{:10.5f}".format(useful_data[1])    
+                      + "{:10.5f}".format(useful_data[2]) + '  ' 
+                      + "{:3s}".format(columns[8])        + '\n' )
 
     os.system("rm " + TempFile )
 
@@ -299,9 +318,9 @@ def main():
     MAE_boot_exp = 0.0
 
 
-  # analyze and print bootstrap data
+  # analyze and print prediction data
 
-    analysis_pred(PRED_File, DATFile, out_tag, out_skipped,
+    analysis_pred(PRED_File, PREFile, DATFile, out_tag, out_skipped,
                   out_exp, reference_fit, reference_pre) 
 
 
