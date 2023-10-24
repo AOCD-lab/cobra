@@ -24,11 +24,11 @@ python runtests.py -m/--matrix file.matrix <br>
 <br>
 
 # Run an example
-cd Examples/01 <br>
+cd Examples/04 <br>
 
 <br>
 First run all tests<br>
-python $PATH_TO_PCS/runtests.py -m sys01.matrix -d up -n 10 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
+python $PATH_TO_PCS/runtests.py -m sys04.matrix -d up -n 20 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
 <br>
 
 Then make plots analyzing tests<br>
