@@ -32,11 +32,12 @@ plt.rcParams.update({ 'font.sans-serif': 'Myriad Pro', 'font.family': 'sans-seri
 
 fig = plt.figure()
 fig.set_figwidth(3.0)
-fig.set_figheight(2.0)
+fig.set_figheight(3.0)
 gs = fig.add_gridspec(1,3, hspace=0, wspace=0)
 
-axs = gs.subplots(sharex=False, sharey=True)
+#plt.title("Optimization cycles", fontsize = 12)
 
+axs = gs.subplots(sharex=False, sharey=True)
 
 axs[0].set_ylim(bottom=0.0, top=1.2)
 axs[0].set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
@@ -71,8 +72,15 @@ for ax in axs:
 
 plt.tight_layout()
 
-filename, file_extension = os.path.splitext(DATAFile)
-plt.savefig(filename+".ps")
-plt.savefig(filename+".png")
+#filename, file_extension = os.path.splitext(DATAFile)
+#plt.savefig(filename+".ps")
+#plt.savefig(filename+".png")
+
+PNGFile  = sys.argv[1].replace("cycles_stat", "cycles_stat.png")
+PSFile   = sys.argv[1].replace("cycles_stat", "cycles_stat.ps")
+plt.savefig(PNGFile)
+plt.savefig(PSFile)
+
+
 
 #plt.show()
