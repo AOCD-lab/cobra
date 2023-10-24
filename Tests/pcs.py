@@ -51,23 +51,18 @@ def GetFiles():
 
 
     MatrixFile = args.matrix
-    MLRFile    = MatrixFile.replace("matrix", "mlr_r2")
-    LOOFile    = MatrixFile.replace("matrix", "loo_q2")
-    YRANDFile  = MatrixFile.replace("matrix", "yrand_yr2")
-    BOOTFile   = MatrixFile.replace("matrix", "boot_mae")
-    PREDFile   = MatrixFile.replace("matrix", "pred_mae")
-    CYCLEFile  = MatrixFile.replace("matrix", "cycles_stat")
+    Basename = os.path.splitext(MatrixFile)[0]
 
-    MLRFile    = "NM-" + MLRFile
-    LOOFile    = "Rm-NM-" + LOOFile
-    YRANDFile  = "Rm-NM-" + YRANDFile
-    BOOTFile   = "Rm-NM-" + BOOTFile
-    PREDFile   = "NM-" + PREDFile
-    CYCLEFile  = "NM-" + CYCLEFile
+    MLRFile    = "NM-"    + Basename + ".mlr_r2"
+    LOOFile    = "Rm-NM-" + Basename + ".loo_q2"
+    YRANDFile  = "Rm-NM-" + Basename + ".yrand_yr2"
+    BOOTFile   = "Rm-NM-" + Basename + ".boot_mae"
+    PREDFile   = "NM-"    + Basename + ".pred_mae"
+    CYCLEFile  = "NM-"    + Basename + ".cycles_stat"
  
     OUTFile   = MatrixFile.replace("matrix", "pcs")
     
-    return MLRFile, LOOFile, YRANDFile, BOOTFile, PREDFile, CYCLEFile, OUTFile
+    return Basename, MLRFile, LOOFile, YRANDFile, BOOTFile, PREDFile, CYCLEFile, OUTFile
 # --- End of GetFiles -----------------------------
 
 def main():
@@ -75,7 +70,7 @@ def main():
   # get input and output files
 
     
-    MLRFile, LOOFile, YRANDFile, BOOTFile, PREDFile, CYCLEFile, OUTFile = GetFiles()
+    Basename, MLRFile, LOOFile, YRANDFile, BOOTFile, PREDFile, CYCLEFile, OUTFile = GetFiles()
 
 
 # read MLR
@@ -152,11 +147,11 @@ def main():
     file_lines = ( file.readlines() )
     file.close()
     words = []
-    words = file_lines[3].split()
+    words = file_lines[4].split()[6:9]
     words = np.array(words).astype(np.float)
-    cycle_pre = words[4]
-    cycle_acc = words[5]
-    cycle_rec = words[6]
+    cycle_pre = words[0]
+    cycle_acc = words[1]
+    cycle_rec = words[2]
 
 
 # calculate PCS
@@ -193,19 +188,20 @@ def main():
     PCS[0] = PCS[0]/12.0
 
     with open(OUTFile, "w") as f:
-         f.write("{:10s}".format('$R^2$        ') + "{:8.3f}".format(aR2     ) + "{:8.3f}".format(mlr_ar2       ) + "{:8.3f}".format(PCS[1])  + '\n' )
-         f.write("{:10s}".format('$MAE_{Fit}$  ') + "{:8.3f}".format(MAE_Fit ) + "{:8.3f}".format(mlr_mae       ) + "{:8.3f}".format(PCS[2])  + '\n' )
-         f.write("{:10s}".format('$Q^2$        ') + "{:8.3f}".format(Q2      ) + "{:8.3f}".format(loo_q2        ) + "{:8.3f}".format(PCS[3])  + '\n' )
-         f.write("{:10s}".format('$MAE_{LOO}$  ') + "{:8.3f}".format(MAE_LOO ) + "{:8.3f}".format(loo_mae       ) + "{:8.3f}".format(PCS[4])  + '\n' )
-         f.write("{:10s}".format('$SR^2_{Max}}$') + "{:8.3f}".format(aYR2_Max) + "{:8.3f}".format(yrand_syr2_max) + "{:8.3f}".format(PCS[5])  + '\n' )
-         f.write("{:10s}".format('$SR^2_{Av}$  ') + "{:8.3f}".format(aYR2_Ave) + "{:8.3f}".format(yrand_syr2_ave) + "{:8.3f}".format(PCS[6])  + '\n' )
-         f.write("{:10s}".format('$MAD_{PR}$   ') + "{:8.3f}".format(MAE_PR  ) + "{:8.3f}".format(boot_mae_fit  ) + "{:8.3f}".format(PCS[7])  + '\n' )
-         f.write("{:10s}".format('$MAD_{CF}$   ') + "{:8.3f}".format(MAE_CF  ) + "{:8.3f}".format(boot_mae_cff  ) + "{:8.3f}".format(PCS[8])  + '\n' )
-         f.write("{:10s}".format('$MAE_{T20}$  ') + "{:8.3f}".format(MAE_T20 ) + "{:8.3f}".format(pred_mae      ) + "{:8.3f}".format(PCS[9])  + '\n' )
-         f.write("{:10s}".format('$Acc_{80}$   ') + "{:8.3f}".format(Acc_80  ) + "{:8.3f}".format(cycle_pre     ) + "{:8.3f}".format(PCS[10]) + '\n' )
-         f.write("{:10s}".format('$Pre_{80}$   ') + "{:8.3f}".format(Pre_80  ) + "{:8.3f}".format(cycle_acc     ) + "{:8.3f}".format(PCS[11]) + '\n' )
-         f.write("{:10s}".format('$Rec_{80}$   ') + "{:8.3f}".format(Rec_80  ) + "{:8.3f}".format(cycle_rec     ) + "{:8.3f}".format(PCS[12]) + '\n' )
-         f.write("{:10s}".format('PCS     ') + "{:8.3f}".format(PCS[0]) + '\n' )
+         f.write("{:10s}".format('             ') + "{:10s}".format('Reference') + "{:10s}".format(Basename       ) + "{:10s}".format('Delta ') + '\n' )
+         f.write("{:10s}".format('$R^2$        ') + "{:8.3f}".format(aR2     )   + "{:8.3f}".format(mlr_ar2       ) + "{:8.3f}".format(PCS[1])  + '\n' )
+         f.write("{:10s}".format('$MAE_{Fit}$  ') + "{:8.3f}".format(MAE_Fit )   + "{:8.3f}".format(mlr_mae       ) + "{:8.3f}".format(PCS[2])  + '\n' )
+         f.write("{:10s}".format('$Q^2$        ') + "{:8.3f}".format(Q2      )   + "{:8.3f}".format(loo_q2        ) + "{:8.3f}".format(PCS[3])  + '\n' )
+         f.write("{:10s}".format('$MAE_{LOO}$  ') + "{:8.3f}".format(MAE_LOO )   + "{:8.3f}".format(loo_mae       ) + "{:8.3f}".format(PCS[4])  + '\n' )
+         f.write("{:10s}".format('$SR^2_{Max}}$') + "{:8.3f}".format(aYR2_Max)   + "{:8.3f}".format(yrand_syr2_max) + "{:8.3f}".format(PCS[5])  + '\n' )
+         f.write("{:10s}".format('$SR^2_{Av}$  ') + "{:8.3f}".format(aYR2_Ave)   + "{:8.3f}".format(yrand_syr2_ave) + "{:8.3f}".format(PCS[6])  + '\n' )
+         f.write("{:10s}".format('$MAD_{PR}$   ') + "{:8.3f}".format(MAE_PR  )   + "{:8.3f}".format(boot_mae_fit  ) + "{:8.3f}".format(PCS[7])  + '\n' )
+         f.write("{:10s}".format('$MAD_{CF}$   ') + "{:8.3f}".format(MAE_CF  )   + "{:8.3f}".format(boot_mae_cff  ) + "{:8.3f}".format(PCS[8])  + '\n' )
+         f.write("{:10s}".format('$MAE_{T20}$  ') + "{:8.3f}".format(MAE_T20 )   + "{:8.3f}".format(pred_mae      ) + "{:8.3f}".format(PCS[9])  + '\n' )
+         f.write("{:10s}".format('$Acc_{80}$   ') + "{:8.3f}".format(Acc_80  )   + "{:8.3f}".format(cycle_pre     ) + "{:8.3f}".format(PCS[10]) + '\n' )
+         f.write("{:10s}".format('$Pre_{80}$   ') + "{:8.3f}".format(Pre_80  )   + "{:8.3f}".format(cycle_acc     ) + "{:8.3f}".format(PCS[11]) + '\n' )
+         f.write("{:10s}".format('$Rec_{80}$   ') + "{:8.3f}".format(Rec_80  )   + "{:8.3f}".format(cycle_rec     ) + "{:8.3f}".format(PCS[12]) + '\n' )
+         f.write("{:10s}".format('PCS     ')      + "{:8.3f}".format(PCS[0])     + '\n' )
 
 
 #==============================================================================
