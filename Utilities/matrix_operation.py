@@ -62,7 +62,10 @@ def read_matrix(matrix_file):
   # reshape 1D arrays to 2D
 
     electronic_descriptors = electronic_descriptors.reshape((no_of_electronics, no_of_systems))
-    buried_volumes         = buried_volumes.reshape((no_of_buried_volumes, 2*no_of_systems))
+    if no_of_sterics == 1:
+       buried_volumes = buried_volumes.reshape((no_of_buried_volumes, 1*no_of_systems))
+    else:
+       buried_volumes = buried_volumes.reshape((no_of_buried_volumes, 2*no_of_systems))
 
 
   # all done - return values
@@ -114,6 +117,7 @@ def write_matrix(matrix_file          , title             , print_flag          
      
          for r in range(no_of_electronics):
                f.write( "{:12s}".format(electronic_tags[r]) )
+
                for i in range(no_of_systems) : 
                    f.write( "{:14.5e}".format(electronic_descriptors[r][i]) )
                f.write( '\n')
@@ -121,9 +125,15 @@ def write_matrix(matrix_file          , title             , print_flag          
          for r in range(no_of_buried_volumes):
                f.write( "{:6.2f}".format(radius_proximal[r])  
                       + "{:6.2f}".format(radius_distal[r]) )
-               for i in range(no_of_systems) : 
-                   f.write( "{:9.3f}".format(buried_volumes[r][2*i])  
-                          + "{:7.3f}".format(buried_volumes[r][2*i+1]) )
+
+               if no_of_sterics == 1:
+                  for i in range(no_of_systems) : 
+                      f.write( "{:9.3f}".format(buried_volumes[r][i]) )
+               else:
+                  for i in range(no_of_systems) : 
+                      f.write( "{:9.3f}".format(buried_volumes[r][2*i])  
+                             + "{:7.3f}".format(buried_volumes[r][2*i+1]) )
+
                f.write( '\n')
 
 
