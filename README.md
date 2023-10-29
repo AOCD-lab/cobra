@@ -13,7 +13,12 @@ sh ./link.sh <br>
 cd .. <br>
 <br>
 
-Usage:  <br>
+Usage:  Note insertion of csv_to_matrix below  <br>
+<br>
+<br>
+python Utilities/csv_to_matrix.py -c/--csv file.csv <br>
+<br>
+<br>
 python runtests.py -m/--matrix file.matrix <br>
 &emsp; &emsp; &emsp;  -n/--no_of_cycles  No of randomizaiton/bootstrap/optimization cycles  <br>
 &emsp; &emsp; &emsp;  -t/--precentage_top_preds fraction of top/bottom systems to predict: 0.1 = 10% predicted <br>
@@ -23,9 +28,15 @@ python runtests.py -m/--matrix file.matrix <br>
 &emsp; &emsp; &emsp;  -c/--cutoff cutoff to define TP/TN: 0.8 = Max experimental performance * 0.8 <br>
 <br>
 
-# Run an example
-cd Examples/04 <br>
+# Run an example:   Note example dir changed to csv04  <br>
+cd Examples/csv04 <br>
 
+<br>
+<br>
+First convert csv to matrix: <br>
+<br>
+python Utilities/csv_to_matrix.py -c sys04.csv <br>
+<br>
 <br>
 First run all tests<br>
 python $PATH_TO_PCS/runtests.py -m sys04.matrix -d up -n 20 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
