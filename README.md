@@ -32,11 +32,9 @@ python runtests.py -m/--matrix file.matrix <br>
 cd Examples/csv04 <br>
 
 <br>
-<br>
-First convert csv to matrix: <br>
+<b>First convert csv to matrix: </b><br>
 <br>
 python Utilities/csv_to_matrix.py -c sys04.csv <br>
-<br>
 <br>
 First run all tests<br>
 python $PATH_TO_PCS/runtests.py -m sys04.matrix -d up -n 20 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
