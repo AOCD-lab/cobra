@@ -177,11 +177,16 @@ def reorder_matrix(title             , print_flag             , normalization_fl
         for e in range(no_of_electronics):
             out_ele[e][r] = electronic_descriptors[e][out_indices[r]]
 
-        for s in range(no_of_buried_volumes):
-            r1 = r*2
-            r2 = out_indices[r]*2
-            out_vbu[s][r1] = buried_volumes[s][r2]
-            out_vbu[s][r1+1] = buried_volumes[s][r2+1]
+        if no_of_sterics == 1:
+            for s in range(no_of_buried_volumes):
+                out_vbu[s][r] = buried_volumes[s][r]
+         
+        if no_of_sterics == 2:
+            for s in range(no_of_buried_volumes):
+                r1 = r*2
+                r2 = out_indices[r]*2
+                out_vbu[s][r1] = buried_volumes[s][r2]
+                out_vbu[s][r1+1] = buried_volumes[s][r2+1]
 
 
   # all done, return the reordered data
