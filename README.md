@@ -28,15 +28,15 @@ python runtests.py -m/--matrix file.matrix <br>
 &emsp; &emsp; &emsp;  -c/--cutoff cutoff to define TP/TN: 0.8 = Max experimental performance * 0.8 <br>
 <br>
 
-# Run an example:   Note example dir changed to csv04  <br>
+# Run an example:   Note example dir changed to csv04  
 cd Examples/csv04 <br>
 
 <br>
 <b>First convert csv to matrix: </b><br>
 <br>
 python Utilities/csv_to_matrix.py -c sys04.csv <br>
-<br>
-First run all tests<br>
+
+Then run all tests<br>
 python $PATH_TO_PCS/runtests.py -m sys04.matrix -d up -n 20 -t .2 -b .2 -o .3 -d up -c 0.8 <br>
 <br>
 
