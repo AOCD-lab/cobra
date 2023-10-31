@@ -42,7 +42,7 @@ PRED_File  = sys.argv[1].replace("matrix", "boot_pred")
 
 RUN_CHECK_COEF = PYTHONHOME + "Plots/check_boot_coef.py"
 RUN_CHECK_PRED = PYTHONHOME + "Plots/check_boot_pred.py"
-RUN_PLOTS      = PYTHONHOME + "plots/plot_boot_coef.py"
+RUN_PLOTS      = PYTHONHOME + "Plots/plot_boot_coef.py"
 
 subprocess.run(["python", RUN_CHECK_COEF, COEF_File])
 subprocess.run(["python", RUN_CHECK_PRED, PRED_File])
