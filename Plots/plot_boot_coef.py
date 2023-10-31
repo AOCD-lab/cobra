@@ -27,8 +27,8 @@ from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 #CFFFile   = sys.argv[1].replace("matrix", "MAE_boot_coef-cut")
 #PREFile   = sys.argv[1].replace("matrix", "MAE_boot_pred-cut")
 
-CFFFile = "COEF_FILE"
-PREFile = "FITT_FILE"
+CFFFile = "COEF_File"
+PREFile = "FITT_File"
 
 # read coefficient file
 
