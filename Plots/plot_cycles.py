@@ -7,20 +7,28 @@ import numpy as np
 
 DATAFile = sys.argv[1]
 
-input=open(DATAFile,"r")
+#input=open(DATAFile,"r")
+
+
+with open(DATAFile, "r") as f:
+     lines = f.readlines()
+
+
+
+
 
 a=[1, 2, 3, 4]
 x=[]
 y=[]
 z=[]
 
-for line in input:
+for line in lines[1:]:
       line = line[:-1]
       word = line.split()
 #     a.append(eval(word[0]))
-      x.append(eval(word[4]))
-      y.append(eval(word[5]))
-      z.append(eval(word[6]))
+      x.append(eval(word[5]))
+      y.append(eval(word[6]))
+      z.append(eval(word[7]))
 
 a = np.array(a)
 x = np.array(x)
