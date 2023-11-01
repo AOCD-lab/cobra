@@ -61,14 +61,15 @@ def main():
        f.write("1  \n")
        f.write("1  \n")
    
-       d0 = dataset[column_names[0]].to_numpy()
+       d0 = dataset[column_names[0]].to_numpy(dtype=str)
        for system in range(N_Systems):
+           f.write( "            ")
            f.write( "{:12s}".format(d0[system]) )
        f.write( "\n")
    
        for col in range(len(column_names)-2):
            d0 = dataset[column_names[col+1]].to_numpy()
-           f.write( "desc        " )
+           f.write("{:12s}".format(column_names[col+1]))
            for system in range(N_Systems):
                f.write( "{:10.4f}".format(d0[system]) )
            f.write( "\n")
