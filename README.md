@@ -24,11 +24,7 @@ python runtests.py -m/--matrix file.matrix <br>
 &emsp; &emsp; &emsp;  -t/--precentage_top_preds fraction of top/bottom systems to predict: 0.1 = 10% predicted <br>
 &emsp; &emsp; &emsp;  -b/--precentage_bootstrap fraction of systems out of the bags:  0.2 = 20% held out <br>
 &emsp; &emsp; &emsp;  -o/--precentage_cycles fraction of systems out in the optimization cycles:  0.3 = 30% held out <br>
-
-<!--
-&emsp; &emsp; &emsp;  -d/--direction up or down: keywords up/dw <br>
---!>
-
+&emsp; &emsp; &emsp;  -d/--direction up or down: keywords up/dw  --- Currently deactivated ---<br>
 &emsp; &emsp; &emsp;  -c/--cutoff cutoff to define TP/TN: 0.8 = Max experimental performance * 0.8 <br>
 <br>
 
