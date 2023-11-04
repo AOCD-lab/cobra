@@ -101,13 +101,13 @@ def main():
 
 
 
-    with open("EXPY_FILE", "w") as f:
+    with open("EXPY_File", "w") as f:
          for e in range(len(clean_Err_exp)):
              f.write("{:8.3f}".format(clean_Err_exp[e]) + ' \n'  )
 
 
 
-    with open("FITT_FILE", "w") as f:
+    with open("FITT_File", "w") as f:
          for e in range(len(clean_Err_fit)):
              f.write("{:8.3f}".format(clean_Err_fit[e]) + ' \n'  )
 
