@@ -269,30 +269,10 @@ c     Real*8 :: Rs, Rl, dum1, dum2
 ! Reading content
 !=========================================================================
 
-      read(101,*)Labels(1:nSystem)                     ! one blank line for titles, skip
-
-      read(101,'(a)')aString
-      k = index(aString, " ")
-
-      if (k.eq.1) then
-         write(6,*)' No label for experimental data'
-         stop
-      endif
-
-      Lab_Exp = aString(1:k-1)
-      read(aString(k:5000),*)(Experiments(j),j=1,nSystem)
-
+      read(101,*)Labels(1:nSystem)                  
+      read(101,*)Lab_Exp,(Experiments(j),j=1,nSystem)
       do i = 1, nElectronics
-        read(101,'(a)')aString
-        k = index(aString, " ")
-
-        if (k.eq.1) then
-           write(6,*)' No label for electronic descriptors'
-           stop
-        endif
-
-        Lab_Ele(i) = aString(1:k-1)
-        read(aString(k:5000),*)(Electronic(j,i),j=1,nSystem)
+        read(101,*)Lab_Ele(i),(Electronic(j,i),j=1,nSystem)
       enddo
 
       do i = 1, nPoints
@@ -848,7 +828,7 @@ c    x      1.0 - std/std2, Rv(i), Rr(i)
          MatrixOutFile='Rm-'//InputFile
          open(102, file=MatrixOutFile, status='unknown')
          write(102,'(a200)')Title
-         write(102,*)' 0 '                        ! Iwrite 
+         write(102,*)' 0'                        ! Iwrite 
          write(102,*)NormalizeFlag
          write(102,*)IShift
          write(102,*)nSkip,(indSkip(i),i=1,nSkip)
@@ -856,11 +836,11 @@ c    x      1.0 - std/std2, Rv(i), Rr(i)
          write(102,*)nElectronics
          write(102,*)nSteric
          write(102,*)'1'
-         write(102,'(12x,100(a12,1x))')(Labels(i),i=1,nSystem)                ! one blank line for titles, skip
-         write(102,'(a12,100e15.6)')
+         write(102,'(12x,*(a12,1x))')(Labels(i),i=1,nSystem)            
+         write(102,'(a12,*(e15.6))')
      +        Lab_Exp,(Experiments(1:nSystem)*Exp_SD+Exp_Av)
          do i = 1, nElectronics
-            write(102,'(a12,100e15.6)')Lab_Ele(i),
+            write(102,'(a12,*(e15.6))')Lab_Ele(i),
      +           (Electronic(1:nSystem, i)*Ele_SD(i)+Ele_AV(i))
          enddo
          do j = 1, nSystem
@@ -869,7 +849,7 @@ c    x      1.0 - std/std2, Rv(i), Rr(i)
                temp(k+l) = Vb(j, NMax, l)*Vb_SD(NMax,l)+Vb_AV(NMax,l)
             enddo
          enddo
-         write(102,'(2f6.2,100f8.3)')Rv(NMax),Rr(NMax),
+         write(102,'(2f6.2,*(f8.3))')Rv(NMax),Rr(NMax),
      +        (temp(i),i=1,nSteric*nSystem)
       endif
 !=========================================================================
