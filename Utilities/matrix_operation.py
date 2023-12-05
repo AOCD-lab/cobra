@@ -60,7 +60,7 @@ def read_matrix(matrix_file):
 
     
   # reshape 1D arrays to 2D
-
+    
     electronic_descriptors = electronic_descriptors.reshape((no_of_electronics, no_of_systems))
     if no_of_sterics == 1:
        buried_volumes = buried_volumes.reshape((no_of_buried_volumes, 1*no_of_systems))
