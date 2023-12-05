@@ -2,7 +2,7 @@ import numpy as np
 
 def read_matrix(matrix_file):
 
-  # read the file and save it as a list of lines in variable "file_lines"
+  # read the file and save it as a list of lines in variable "file_lines" 
 
     file_      = open(matrix_file, "r")  
     file_lines = ( file_.readlines() )  
