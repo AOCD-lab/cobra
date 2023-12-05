@@ -61,23 +61,41 @@ def main():
        f.write("1  \n")
        f.write("1  \n")
    
-       d0 = dataset[column_names[0]].to_numpy(dtype=str)
+   
+     # write system labels
+
+       d0 = dataset[column_names[N_Descriptors+1]].to_numpy(dtype=str)
        for system in range(N_Systems):
            f.write( "            ")
            f.write( "{:12s}".format(d0[system]) )
        f.write( "\n")
    
-       for col in range(len(column_names)-2):
-           d0 = dataset[column_names[col+1]].to_numpy()
-           f.write("{:12s}".format(column_names[col+1]))
+
+     # write experimental data
+
+       d0 = dataset[column_names[N_Descriptors]].to_numpy()
+       f.write("{:15.4s}".format(column_names[N_Descriptors]))
+       for system in range(N_Systems):
+           f.write( "{:15.4f}".format(d0[system]) )
+       f.write( "\n")
+   
+
+     # write descriptors
+
+       for col in range(len(column_names)-3):
+           d0 = dataset[column_names[col]].to_numpy()
+           f.write("{:12s}".format(column_names[col]))
            for system in range(N_Systems):
-               f.write( "{:10.4f}".format(d0[system]) )
+               f.write( "{:15.4f}".format(d0[system]) )
            f.write( "\n")
    
-       d0 = dataset[column_names[N_Descriptors+1]].to_numpy()
+
+     # write last descriptor as steric with radius
+
+       d0 = dataset[column_names[N_Descriptors-1]].to_numpy()
        f.write( "3.0   0.1   " )
        for system in range(N_Systems):
-           f.write( "{:10.4f}".format(d0[system]) )
+           f.write( "{:15.4f}".format(d0[system]) )
        f.write( "\n")
 
 
