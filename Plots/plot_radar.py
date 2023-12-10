@@ -103,7 +103,14 @@ ax.legend(loc="lower right", bbox_to_anchor=(.1, 1.0))
 
 ax.yaxis.grid(True)
 ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
-ax.yaxis.set_major_locator(ticker.FixedLocator([-1.2,-1.0,-0.8,-0.6,-0.4,-0.2,0.0,0.2,0.4,0.6,0.8,1.0,1.2]))
+
+#ax.yaxis.set_major_locator(ticker.FixedLocator([-1.2,-1.0,-0.8,-0.6,-0.4,-0.2,0.0,0.2,0.4,0.6,0.8,1.0,1.2]))
+
+tikki=np.arange(ymin+0.2,ymax,0.2)
+ax.yaxis.set_major_locator(ticker.FixedLocator(tikki))
+
+
+
 ax.yaxis.set_minor_locator(ticker.FixedLocator([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1.1]))
 ax.minorticks_on()
 
