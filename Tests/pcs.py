@@ -58,7 +58,7 @@ def GetFiles():
     YRANDFile  = "Rm-NM-" + Basename + ".yrand_yr2"
     BOOTFile   = "Rm-NM-" + Basename + ".boot_mae"
     PREDFile   = "NM-"    + Basename + ".pred_mae"
-    CYCLEFile  = "NM-"    + Basename + ".cycles_stat"
+    CYCLEFile  =            Basename + ".cycles_stat"
  
     OUTFile   = MatrixFile.replace("matrix", "pcs")
     
