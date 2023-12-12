@@ -74,11 +74,12 @@ or (not args.cutoff)  :
 
 # set system dependent variables
 
+MATRIX            =  args.matrix
 BACKUP_MATRIX     = "backup.matrix"
 NORMALIZED_MATRIX = "NM-" + args.matrix
 REORDERED_MATRIX  = "NM-" + args.matrix
 R2MIN_MATRIX      = "Rm-" + args.matrix
-R2MIN_NM_MATRIX      = "Rm-NM-" + args.matrix
+R2MIN_NM_MATRIX   = "Rm-NM-" + args.matrix
 TMP_MATRIX        = "tmp.matrix"
 
 
@@ -91,6 +92,7 @@ subprocess.run(["cp", args.matrix, BACKUP_MATRIX])
 
 print(' Reordering and normalizing matrix...')
 subprocess.run(["python", REORDER_MATRIX, "-m", args.matrix, "-d", "up", "-o", TMP_MATRIX])
+subprocess.run(["cp", TMP_MATRIX, args.matrix])
 subprocess.run(["python", NORMALIZE_MATRIX, "-m", TMP_MATRIX,"-o", NORMALIZED_MATRIX])
 
 
@@ -114,7 +116,7 @@ print(' Running top systems predictions...')
 subprocess.run(["python", RUN_PRED,  "-m", NORMALIZED_MATRIX, "-t", args.percentage_top_preds, "-d", args.direction])
 
 print(' Running optimization cycles...')
-subprocess.run(["python", RUN_BAGS,  "-m", NORMALIZED_MATRIX, "-o", args.percentage_cycles, "-d", args.direction, "-c", args.cutoff, "-n", args.no_of_cycles])
+subprocess.run(["python", RUN_BAGS,  "-m",            MATRIX, "-o", args.percentage_cycles, "-d", args.direction, "-c", args.cutoff, "-n", args.no_of_cycles])
 
 
 subprocess.run(["python", RUN_PCS,   "-m", args.matrix])
