@@ -86,12 +86,13 @@ ax.grid(color='black', alpha=1.0)
 ymin = np.min(data3)
 ymax = np.max(data3)
 
-test = np.arange(-2.0,+2.0,0.2)
+test = np.arange(-5.0,+5.0,0.2)
 
 for it in range(len(test)):
     if test[it] > ymax:
        ymax = test[it]
        break
+for it in range(len(test)):
     if test[it] > ymin:
        ymin = test[it-1]
        break
@@ -104,11 +105,9 @@ ax.legend(loc="lower right", bbox_to_anchor=(.1, 1.0))
 ax.yaxis.grid(True)
 ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
 
-#ax.yaxis.set_major_locator(ticker.FixedLocator([-1.2,-1.0,-0.8,-0.6,-0.4,-0.2,0.0,0.2,0.4,0.6,0.8,1.0,1.2]))
 
 tikki=np.arange(ymin+0.2,ymax,0.2)
 ax.yaxis.set_major_locator(ticker.FixedLocator(tikki))
-
 
 
 ax.yaxis.set_minor_locator(ticker.FixedLocator([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1.1]))
@@ -117,7 +116,7 @@ ax.minorticks_on()
 
 # plot zero axis in red color
 
-circle = plt.Circle((0, 0), 0.6, transform=ax.transData._b, fill=False, edgecolor='red', linewidth=2, zorder=1)
+circle = plt.Circle((0, 0), -ymin, transform=ax.transData._b, fill=False, edgecolor='red', linewidth=2, zorder=1)
 plt.gca().add_artist(circle)
 
 
