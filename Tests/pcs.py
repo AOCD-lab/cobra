@@ -157,18 +157,22 @@ def main():
 # calculate PCS
 
     PCS = np.zeros(13)
-    aR2      =  0.90
-    MAE_Fit  =  0.22
-    Q2       =  0.82
-    MAE_LOO  =  0.30
-    aYR2_Max =  0.80
-    aYR2_Ave =  0.25
-    MAE_CF   =  0.18
-    MAE_PR   =  0.17
-    MAE_T20  =  0.59
-    Acc_80   =  0.74
-    Pre_80   =  0.75
-    Rec_80   =  0.77
+
+
+  # last reference values
+
+    aR2      =  0.903
+    MAE_Fit  =  0.198
+    Q2       =  0.852
+    MAE_LOO  =  0.289
+    aYR2_Max =  0.817
+    aYR2_Ave =  0.279
+    MAE_PR   =  0.179
+    MAE_CF   =  0.170
+    MAE_T20  =  0.403
+    Acc_80   =  0.743
+    Pre_80   =  0.762
+    Rec_80   =  0.776
 
 
     PCS[1]  =   (mlr_ar2        - aR2      )
@@ -177,8 +181,8 @@ def main():
     PCS[4]  =  -(loo_mae        - MAE_LOO  )
     PCS[5]  =  -(yrand_syr2_max - aYR2_Max )
     PCS[6]  =  -(yrand_syr2_ave - aYR2_Ave )
-    PCS[7]  =  -(boot_mae_cff   - MAE_CF   )
-    PCS[8]  =  -(boot_mae_fit   - MAE_PR   )
+    PCS[7]  =  -(boot_mae_fit   - MAE_PR   )
+    PCS[8]  =  -(boot_mae_cff   - MAE_CF   )
     PCS[9]  =  -(pred_mae       - MAE_T20  )
     PCS[10] =   (cycle_pre      - Acc_80   )
     PCS[11] =   (cycle_acc      - Pre_80   )
