@@ -601,9 +601,12 @@ c    x      1.0 - std/std2, Rv(i), Rr(i)
          R2max = 1.0-std/std2
          nMax = i
        endif
-       write(6,'(a3,2i5,2f6.2,20e12.4)')"NP " 
+       write(6,*)"NP " 
      x         ,i,nMax,Rv(i),Rr(i),1.0-std/std2,R2max
      x         ,(B(k,1),k=1,n)
+c      write(6,'(a3,2i5,2f6.2,20e12.4)')"NP " 
+c    x         ,i,nMax,Rv(i),Rr(i),1.0-std/std2,R2max
+c    x         ,(B(k,1),k=1,n)
       enddo
 
 !=========================================================================
