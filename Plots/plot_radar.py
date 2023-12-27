@@ -72,7 +72,7 @@ fig, ax = plt.subplots(figsize=(5,5), subplot_kw=dict(polar=True))
 
 basename = os.path.splitext(sys.argv[1])[0]
 
-ax.plot(label_loc, data3, lw=3, label=basename, zorder=2)
+ax.plot(label_loc, data3, lw=3, label=basename, color='black', zorder=5)
 
 ax.set_theta_direction(-1)
 ax.set_theta_offset(np.pi / 2.0)
@@ -111,18 +111,27 @@ ax.yaxis.set_major_locator(ticker.FixedLocator(tikki))
 
 
 ax.yaxis.set_minor_locator(ticker.FixedLocator([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1.1]))
-ax.minorticks_on()
+ax.minorticks_off()
 
 
-# plot zero axis in red color
+# plot zero axis in red color then plot positive area green and negative red
 
-circle = plt.Circle((0, 0), -ymin, transform=ax.transData._b, fill=False, edgecolor='red', linewidth=2, zorder=1)
+circle = plt.Circle((0, 0), -ymin, transform=ax.transData._b, fill=False, edgecolor='red', linewidth=2, zorder=3)
 plt.gca().add_artist(circle)
 
+thetas = np.linspace(0,2*np.pi,500)
+ax.fill(thetas, [ymax for i in thetas], color = "green", alpha = 0.3, zorder= 1)
+thetas = np.linspace(0,2*np.pi,500)
+ax.fill(thetas, [0 for i in thetas], color = "red", alpha = 0.3, zorder= 2)
+
+
+# draw labels
 
 ax.set_rlabel_position(180/1 + 180/12)
-
 lines, labels = plt.thetagrids(np.degrees(label_loc), labels=label)
+
+
+# save images to files
 
 plt.tight_layout()
 
