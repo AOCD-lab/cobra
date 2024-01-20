@@ -88,6 +88,19 @@ TMP_MATRIX        = "tmp.matrix"
 subprocess.run(["cp", args.matrix, BACKUP_MATRIX])
 
 
+# Set in matrix that 2nd line = 1 for writing best matrix
+
+file = open(BACKUP_MATRIX, "r")
+file_lines = ( file.readlines() )
+file.close()
+
+file_lines[1] = "1  \n"
+
+file = open(args.matrix, "w") 
+file.write("".join(file_lines)) 
+file.close()
+
+
 # normalize and reorder matrix
 
 print(' Reordering and normalizing matrix...')
