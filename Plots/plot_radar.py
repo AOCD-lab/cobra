@@ -21,10 +21,13 @@ def read_data(DATFile):
     with open(DATFile, "r") as f:
          lines = f.readlines()
     
-    label = []
-    data1 = []
-    data2 = []
-    data3 = []
+#   label = []
+#   data1 = []
+#   data2 = []
+#   data3 = []
+
+    label, data1, data2, data3 = [], [], [], []
+
 
     for line in lines[1:]:
         words = line.split()
