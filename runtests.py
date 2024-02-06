@@ -63,7 +63,7 @@ or (not args.percentage_cycles) \
 or (not args.direction)  \
 or (not args.cutoff)  :
    print(' Usage:  run_reorder.py -m/--matrix file.matrix')
-   print('                        -n/--no_of_cycles  No of randomizaiton/bootstrap/optimization cycles ')
+   print('                        -n/--no_of_cycles  No of randomization/bootstrap/optimization cycles ')
    print('                        -t/--precentage_top_preds fraction of top/bottom systems to predict: 0.1 = 10% predicted')
    print('                        -b/--precentage_bootstrap fraction of systems out of the bags:  0.2 = 20% held out')
    print('                        -o/--precentage_cycles fraction of systems out in the optimization cycles:  0.3 = 30% held out')
@@ -100,6 +100,20 @@ file = open(args.matrix, "w")
 file.write("".join(file_lines)) 
 file.close()
 
+
+# Print input data into basename.info
+
+BASE_INFO = MATRIX.replace(".matrix", "")
+
+file = open(BASE_INFO+".inf", "w")
+file.write("CSV file                                            : " + BASE_INFO + "\n")
+file.write("No of randomizaiton/bootstrap/optimization cycles   : " + args.no_of_cycles + "\n")  
+file.write("% of top/bottom systems to predict                  : " + args.percentage_top_preds + "\n")
+file.write("% of systems out of the bag in the bootstrap cycles : " + args.percentage_bootstrap + "\n")
+file.write("% of systems out in the optimization cycles         : " + args.percentage_cycles + "\n")
+file.write("Ranking systems upward or downward                  : " + args.direction + "\n")
+file.write("cutoff to define TP/TN                              : " + args.cutoff + "\n")
+file.close()  
 
 # normalize and reorder matrix
 
