@@ -105,7 +105,7 @@ file.close()
 
 BASE_INFO = MATRIX.replace(".matrix", "")
 
-file = open(BASE_INFO+".inf", "w")
+file = open(BASE_INFO+".info", "w")
 file.write("CSV file                                            : " + BASE_INFO + "\n")
 file.write("No of randomizaiton/bootstrap/optimization cycles   : " + args.no_of_cycles + "\n")  
 file.write("% of top/bottom systems to predict                  : " + args.percentage_top_preds + "\n")
