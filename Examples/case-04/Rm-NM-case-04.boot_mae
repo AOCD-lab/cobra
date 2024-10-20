@@ -1,0 +1,4 @@
+MAE_boot_exp     0.292   StDev      0.398
+MAE_boot_fit     0.232   StDev      0.404
+MAE_boot_cff     0.197   StDev      0.270
+MAE_boot_r2      0.006   StDev      0.004
