@@ -44,7 +44,7 @@ Then make plots analyzing tests<br>
 python $PATH_TO_PCS/runplots.py -m example.matrix <br>
 <br>
 
-Note:  $PATH_TO_PCS is the path to the pcs location <br>
+Note:  $PATH_TO_PCS is the path to the cobra location <br>
 
 
 
