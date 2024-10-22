@@ -32,7 +32,7 @@ python runtests.py -m/--matrix file.matrix <br>
 cd Examples/Run-Example <br>
 
 <br>
-<b>First convert csv to matrix: </b><br>
+<b>First convert csv to matrix, the format used by the fortran code: </b><br>
 <br>
 python $PATH_TO_PCS/Utilities/csv_to_matrix.py -c example.csv <br>
 
