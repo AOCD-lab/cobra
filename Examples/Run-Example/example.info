@@ -1,0 +1,7 @@
+CSV file                                            : example
+No of randomizaiton/bootstrap/optimization cycles   : 1000
+% of top/bottom systems to predict                  : .2
+% of systems out of the bag in the bootstrap cycles : .1
+% of systems out in the optimization cycles         : .2
+Ranking systems upward or downward                  : up
+cutoff to define TP/TN                              : 0.8
