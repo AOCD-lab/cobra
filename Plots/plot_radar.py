@@ -21,32 +21,20 @@ def read_data(DATFile):
     with open(DATFile, "r") as f:
          lines = f.readlines()
     
-#   label = []
-#   data1 = []
-#   data2 = []
-#   data3 = []
-
-    label, data1, data2, data3 = [], [], [], []
-
+    label, data1 = [], []
 
     for line in lines[1:]:
         words = line.split()
-        if len(words) == 4:
+        if len(words) == 2:
            label.append(line.split()[0])
            data1.append(float(line.split()[1]))
-           data2.append(float(line.split()[2]))
-           data3.append(float(line.split()[3]))
 
     label = [*label, label[0]]
     data1 = [*data1, data1[0]]
-    data2 = [*data2, data2[0]]
-    data3 = [*data3, data3[0]]
 
     data1 = np.array(data1)
-    data2 = np.array(data2)
-    data3 = np.array(data3)
    
-    return (label, data1, data2, data3)
+    return (label, data1)
 # ------------------------------------------------------
 
 
@@ -63,7 +51,7 @@ if (len(sys.argv)<2) :
 
 # read x_data files
 
-label, data1, data2, data3 = read_data(sys.argv[1])
+label, data1 = read_data(sys.argv[1])
 
 # set figure and plot distribution
 
@@ -75,7 +63,7 @@ fig, ax = plt.subplots(figsize=(5,5), subplot_kw=dict(polar=True))
 
 basename = os.path.splitext(sys.argv[1])[0]
 
-ax.plot(label_loc, data3, lw=3, label=basename, color='black', zorder=5)
+ax.plot(label_loc, data1, lw=3, label=basename, color='black', zorder=5)
 
 ax.set_theta_direction(-1)
 ax.set_theta_offset(np.pi / 2.0)
@@ -86,19 +74,19 @@ ax.grid(color='black', alpha=1.0)
 
 # find plot limits
 
-ymin = np.min(data3)
-ymax = np.max(data3)
+ymin = np.min(data1)
+ymax = np.max(data1)
+ymax = 1.0
 
 test = np.arange(-5.0,+5.0,0.2)
 
 for it in range(len(test)):
-    if test[it] > ymax:
-       ymax = test[it]
-       break
-for it in range(len(test)):
     if test[it] > ymin:
        ymin = test[it-1]
        break
+
+if ymin > 0:
+   ymin = 0
 
 ax.set_ylim(ymin,ymax)
 
@@ -110,6 +98,13 @@ ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
 
 
 tikki=np.arange(ymin+0.2,ymax,0.2)
+
+if ymin < -0.5:
+   tikki=np.arange(ymin+0.3,ymax,0.3)
+
+if ymin < -1.0:
+   tikki=np.arange(ymin+0.4,ymax,0.4)
+
 ax.yaxis.set_major_locator(ticker.FixedLocator(tikki))
 
 
@@ -117,15 +112,19 @@ ax.yaxis.set_minor_locator(ticker.FixedLocator([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.
 ax.minorticks_off()
 
 
-# plot zero axis in red color then plot positive area green and negative red
-
-circle = plt.Circle((0, 0), -ymin, transform=ax.transData._b, fill=False, edgecolor='red', linewidth=2, zorder=3)
-plt.gca().add_artist(circle)
+# plot positive area cyan 
 
 thetas = np.linspace(0,2*np.pi,500)
-ax.fill(thetas, [ymax for i in thetas], color = "green", alpha = 0.3, zorder= 1)
-thetas = np.linspace(0,2*np.pi,500)
-ax.fill(thetas, [0 for i in thetas], color = "red", alpha = 0.3, zorder= 2)
+ax.fill(thetas, [ymax for i in thetas], color = "cyan", alpha = 0.3, zorder= 1)
+
+# if ymin < 0 plot zero axis in red color and negative area red
+
+if ymin < 0:
+   circle = plt.Circle((0, 0), -ymin, transform=ax.transData._b, fill=False, edgecolor='red', linewidth=2, zorder=3)
+   plt.gca().add_artist(circle)
+
+   thetas = np.linspace(0,2*np.pi,500)
+   ax.fill(thetas, [0 for i in thetas], color = "red", alpha = 0.3, zorder= 2)
 
 
 # draw labels
