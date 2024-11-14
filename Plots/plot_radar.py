@@ -69,8 +69,13 @@ ax.set_theta_direction(-1)
 ax.set_theta_offset(np.pi / 2.0)
 
 ax.spines['polar'].set_linewidth(3)
-ax.grid(color='black', alpha=1.0)
 
+# Set the grid line color to 50% gray
+ax.grid(color='0.5', alpha=1.0)  # This is for major grid lines
+ax.yaxis.grid(True, color='0.5', alpha=1.0)  # Explicitly specifying for y-axis major grid
+
+# For minor grid lines (dashed), also set the color to 50% gray
+ax.grid(which='minor', color='0.5', linestyle=':', linewidth=0.5)
 
 # find plot limits
 
@@ -115,7 +120,7 @@ ax.minorticks_off()
 # plot positive area cyan 
 
 thetas = np.linspace(0,2*np.pi,500)
-ax.fill(thetas, [ymax for i in thetas], color = "cyan", alpha = 0.3, zorder= 1)
+ax.fill(thetas, [ymax for i in thetas], color = "cyan", alpha = 0.2, zorder= 1)
 
 # if ymin < 0 plot zero axis in red color and negative area red
 

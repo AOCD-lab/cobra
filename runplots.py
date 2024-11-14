@@ -66,7 +66,7 @@ INP_YRAND  =   "Rm-NM-" + INPUT_HEAD + ".yrand_dat"
 INP_BOOT   =   "Rm-NM-" + INPUT_HEAD + ".matrix"
 INP_PRED   =      "NM-" + INPUT_HEAD + ".pred_out"
 INP_CYCLES =              INPUT_HEAD + ".cycles_stat"
-INP_RADAR  =              INPUT_HEAD + ".pcs"
+INP_RADAR  =              INPUT_HEAD + ".radar_pcs"
 
 
 print(' Running MLR...')

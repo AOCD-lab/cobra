@@ -1,6 +1,6 @@
 
 
-for M in LQ-example HQ-example case-01 case-02 case-03 case-04 case-05 case-06 case-07 01 02 03 04 05
+for M in LQ-example HQ-example case-01 case-02 case-03 case-04 case-05 case-06 case-07 
 do
     cd $M
 
