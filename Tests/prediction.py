@@ -104,8 +104,8 @@ def analysis_pred(PRED_File, PREFile, DATFile, system_tags, out_skipped,
   # ---------------------
 
 
-    MAE_boot_exp= 0.0
-    MAE_boot_fit= 0.0
+    MAE_pred_exp= 0.0
+    MAE_pred_fit= 0.0
     difference_exp = []
     difference_fit = []
 
@@ -127,17 +127,17 @@ def analysis_pred(PRED_File, PREFile, DATFile, system_tags, out_skipped,
 
     with open(PRED_File, "w") as f:
          difference_exp = np.array(difference_exp)
-         MAE_boot_exp   = np.mean(difference_exp)
+         MAE_pred_exp   = np.mean(difference_exp)
          stdv_exp = np.std(difference_exp, ddof=1)
 
          difference_fit = np.array(difference_fit)
-         MAE_boot_fit   = np.mean(difference_fit)
+         MAE_pred_fit   = np.mean(difference_fit)
          stdv_fit = np.std(difference_fit, ddof=1)
 
-         f.write('MAE_boot_exp' + '  StDev    '    + 'MAE_boot_fit' + '  StDev'    + '\n')
-         f.write( "{:8.3f}".format(MAE_boot_exp) 
+         f.write('MAE_pred_exp' + '  StDev    '    + 'MAE_pred_fit' + '  StDev'    + '\n')
+         f.write( "{:8.3f}".format(MAE_pred_exp) 
                 + "{:10.3f}".format(stdv_exp) + '     '
-                + "{:8.3f}".format(MAE_boot_fit) 
+                + "{:8.3f}".format(MAE_pred_fit) 
                 + "{:10.3f}".format(stdv_fit) + '\n')
     return()
 
@@ -314,8 +314,8 @@ def main():
 
   # prediction run done - start analysis writing files
 
-    MAE_boot_fit = 0.0
-    MAE_boot_exp = 0.0
+    MAE_pred_fit = 0.0
+    MAE_pred_exp = 0.0
 
 
   # analyze and print prediction data
